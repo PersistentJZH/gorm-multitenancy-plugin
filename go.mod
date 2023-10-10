@@ -1,4 +1,4 @@
-module gorm-multitenancy-plugin
+module github.com/PersistentJZH/gorm-multitenancy-plugin
 
 go 1.19
 
