@@ -32,10 +32,9 @@ func TenantScope(scopeID interface{}) func(db *gorm.DB) *gorm.DB {
 	}
 }
 func (p *MultiTenancyPlugin) beforeQuery(db *gorm.DB) {
-	
-	if scopeID, ok := db.Get("scope_id"); ok {
-		if field := db.Statement.Schema.LookUpField("scope_id"); field != nil {
-			db.Scopes(TenantScope(scopeID))
-		}
+
+	if field := db.Statement.Schema.LookUpField("scope_id"); field != nil {
+		db.Scopes(TenantScope(db.Statement.Context.Value("scope_id").(string)))
 	}
+
 }
